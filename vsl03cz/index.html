@@ -2,23 +2,7 @@
 
 <head>
 
-  <!-- Script utmify -->
-  <script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
-
-  <script>
-  window.pixelId = "69d457574e405a9878d95ddb";
-  var a = document.createElement("script");
-  a.setAttribute("async", "");
-  a.setAttribute("defer", "");
-  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-  document.head.appendChild(a);
-</script>
+ 
 
   <meta charset="utf-8">
 
@@ -44,6 +28,22 @@
 
   <!-- Main Styles -->
   <link rel="stylesheet" href="css/main.css">
+
+   <!-- Script utmify -->
+  <script
+  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+  data-utmify-prevent-xcod-sck
+  data-utmify-prevent-subids
+></script>
+
+  <script>
+  window.pixelId = "69d457574e405a9878d95ddb";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
 
   <script>
     setTimeout(function () {
@@ -361,36 +361,7 @@
   </div>
 </section>
 
-<script>
-  (function () {
-    // Pega a query string (tudo depois do "?")
-    const query = window.location.search;
-    if (!query) return;
 
-    // Seleciona todos os links da página
-    const links = document.querySelectorAll('a[href]');
-
-    links.forEach(link => {
-      const href = link.getAttribute('href');
-
-      // Ignora âncoras, javascript:void(0), e-mail e tel links
-      if (
-        !href ||
-        href.startsWith('#') ||
-        href.startsWith('mailto:') ||
-        href.startsWith('tel:')
-      ) return;
-
-      // Se o link já tiver UTMs, não duplica
-      const newHref = href.includes('?')
-        ? href + '&' + query.substring(1)
-        : href + query;
-
-      // Atualiza o link com as UTMs
-      link.setAttribute('href', newHref);
-    });
-  })();
-</script>
 
 
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
@@ -582,7 +553,7 @@
 
 </script>
 
-<script>
+<!-- <script>
   // ALTERE O LINK PARA A PÁGINA QUE QUISER MOSTRAR QUANDO O USUÁRIO TENTAR SAIR
   const link = '';
 
@@ -606,7 +577,7 @@
   }
 
   setBackRedirect(link);
-</script>
+</script> -->
 
 
 <script>
@@ -616,11 +587,17 @@
   const params = window.location.search;
   if (!params) return;
 
-  const links = document.querySelectorAll('a');
+  const links = document.querySelectorAll('a[href]');
 
   links.forEach(link => {
     const href = link.getAttribute('href');
-    if (!href || href.startsWith('#')) return;
+
+    if (
+      !href ||
+      href.startsWith('#') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:')
+    ) return;
 
     try {
       if (href.includes('?')) {
