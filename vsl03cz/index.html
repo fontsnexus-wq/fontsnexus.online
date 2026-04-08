@@ -562,20 +562,20 @@
 (function () {
   const urlParams = new URLSearchParams(window.location.search);
 
-  const subid = urlParams.get('utm_source') || '';
-  const subid2 = urlParams.get('utm_campaign') || '';
-  const subid3 = urlParams.get('utm_term') || '';
-  const subid4 = urlParams.get('utm_content') || '';
+  const sub1 = urlParams.get('utm_source') || '';
+  const sub2 = urlParams.get('utm_campaign') || '';
+  const sub3 = urlParams.get('utm_term') || '';
+  const sub4 = urlParams.get('utm_content') || '';
 
   const links = document.querySelectorAll('a[href*="streamparkedshakes.com"]');
 
   links.forEach(link => {
     let url = new URL(link.href);
 
-    url.searchParams.set('subid', subid);
-    url.searchParams.set('subid2', subid2);
-    url.searchParams.set('subid3', subid3);
-    url.searchParams.set('subid4', subid4);
+    if (sub1) url.searchParams.set('sub1', sub1);
+    if (sub2) url.searchParams.set('sub2', sub2);
+    if (sub3) url.searchParams.set('sub3', sub3);
+    if (sub4) url.searchParams.set('sub4', sub4);
 
     link.href = url.toString();
   });
