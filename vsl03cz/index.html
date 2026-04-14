@@ -32,7 +32,6 @@
    <!-- Script utmify -->
   <script
   src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
   async
   defer
 ></script>
@@ -559,25 +558,29 @@
 
 <script>
 (function () {
-  const urlParams = new URLSearchParams(window.location.search);
+  function propagarUTMs() {
+    const urlParams = new URLSearchParams(window.location.search);
 
-  const sub1 = urlParams.get('utm_source') || '';
-  const sub2 = urlParams.get('utm_campaign') || '';
-  const sub3 = urlParams.get('utm_term') || '';
-  const sub4 = urlParams.get('utm_content') || '';
+    const sub1 = urlParams.get('utm_source') || '';
+    const sub2 = urlParams.get('utm_campaign') || '';
+    const sub3 = urlParams.get('utm_term') || '';
+    const sub4 = urlParams.get('utm_content') || '';
+    const sck  = urlParams.get('sck') || '';
 
-  const links = document.querySelectorAll('a[href*="streamparkedshakes.com"]');
+    const links = document.querySelectorAll('a[href*="streamparkedshakes.com"]');
 
-  links.forEach(link => {
-    let url = new URL(link.href);
+    links.forEach(link => {
+      let url = new URL(link.href);
+      if (sub1) url.searchParams.set('sub1', sub1);
+      if (sub2) url.searchParams.set('sub2', sub2);
+      if (sub3) url.searchParams.set('sub3', sub3);
+      if (sub4) url.searchParams.set('sub4', sub4);
+      if (sck)  url.searchParams.set('sck', sck);
+      link.href = url.toString();
+    });
+  }
 
-    if (sub1) url.searchParams.set('sub1', sub1);
-    if (sub2) url.searchParams.set('sub2', sub2);
-    if (sub3) url.searchParams.set('sub3', sub3);
-    if (sub4) url.searchParams.set('sub4', sub4);
-
-    link.href = url.toString();
-  });
+  setTimeout(propagarUTMs, 1500);
 })();
 </script>
   
