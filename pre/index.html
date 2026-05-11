@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chef Na Cozinha</title>
+  <meta name="description" content="Chef Na Cozinha: apresentação institucional da empresa, identidade comercial, dados empresariais e informações de contato em Itaitinga - CE.">
+  <style>
+    :root {
+      --bg: #f7f3ee;
+      --surface: #fffdfb;
+      --ink: #241d18;
+      --muted: #65594d;
+      --line: #dfd4c8;
+      --accent: #9a4f2b;
+      --accent-soft: #f4e7dc;
+      --shadow: 0 16px 40px rgba(36, 29, 24, 0.08);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fbf8f4 0%, var(--bg) 100%);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(251, 248, 244, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(101, 89, 77, 0.12);
+    }
+
+    .topbar-inner {
+      min-height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #9a4f2b, #67331a);
+      color: #fff7f1;
+      font-weight: 800;
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      box-shadow: var(--shadow);
+      flex: 0 0 auto;
+    }
+
+    .brand-copy strong,
+    .brand-copy span {
+      display: block;
+    }
+
+    .brand-copy strong {
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-copy span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 44px 0 20px;
+    }
+
+    .hero-card,
+    .card,
+    .footer-wrap {
+      background: var(--surface);
+      border: 1px solid rgba(101, 89, 77, 0.12);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 36px 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      max-width: 11ch;
+    }
+
+    .hero-card p {
+      margin: 18px 0 0;
+      max-width: 62ch;
+      color: #40362d;
+      font-size: 1.04rem;
+    }
+
+    .hero-points {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .point {
+      padding: 18px;
+      border-radius: 20px;
+      background: #fbf6f0;
+      border: 1px solid rgba(101, 89, 77, 0.1);
+    }
+
+    .point strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.98rem;
+    }
+
+    .point span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    section {
+      padding: 22px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.9rem, 3vw, 3rem);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .about-grid,
+    .services-grid,
+    .contact-grid,
+    .footer-top,
+    .fiscal {
+      display: grid;
+      gap: 20px;
+    }
+
+    .about-grid,
+    .contact-grid,
+    .footer-top {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .about-copy,
+    .about-notes,
+    .contact-panel,
+    .identity-panel {
+      padding: 28px;
+    }
+
+    .about-copy p,
+    .about-notes p,
+    .contact-panel p,
+    .identity-panel p {
+      margin: 0 0 16px;
+      color: #40362d;
+    }
+
+    .about-copy p:last-child,
+    .about-notes p:last-child,
+    .contact-panel p:last-child,
+    .identity-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .service-card {
+      padding: 24px 22px;
+    }
+
+    .service-index {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .service-card h3 {
+      font-size: 1.16rem;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .detail {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: #fbf6f0;
+      border: 1px solid rgba(101, 89, 77, 0.1);
+    }
+
+    .detail strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .detail span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.94rem;
+      word-break: break-word;
+    }
+
+    .cta-band {
+      margin: 6px 0 4px;
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #4f2817, #8a4526 55%, #af663d 100%);
+      color: #fff8f1;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-band strong {
+      display: block;
+      font-size: 1.18rem;
+      margin-bottom: 6px;
+    }
+
+    .cta-band p {
+      margin: 0;
+      color: rgba(255, 248, 241, 0.84);
+    }
+
+    footer {
+      padding: 0 0 40px;
+    }
+
+    .footer-wrap {
+      padding: 30px;
+      background: #201915;
+      color: #f9efe7;
+    }
+
+    .footer-top {
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(249, 239, 231, 0.12);
+    }
+
+    .footer-top p {
+      margin: 10px 0 0;
+      color: rgba(249, 239, 231, 0.76);
+      max-width: 60ch;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      align-content: start;
+    }
+
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      color: #ffd7be;
+    }
+
+    .fiscal {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 22px;
+    }
+
+    .fiscal-box {
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(249, 239, 231, 0.08);
+    }
+
+    .fiscal-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.92rem;
+    }
+
+    .fiscal-box span {
+      display: block;
+      color: rgba(249, 239, 231, 0.78);
+      font-size: 0.93rem;
+    }
+
+    @media (max-width: 960px) {
+      .section-head,
+      .about-grid,
+      .contact-grid,
+      .footer-top,
+      .services-grid,
+      .fiscal,
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        min-height: auto;
+        padding: 12px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        width: min(100% - 20px, 1120px);
+      }
+
+      .hero-card,
+      .about-copy,
+      .about-notes,
+      .contact-panel,
+      .identity-panel,
+      .footer-wrap {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .nav {
+        font-size: 0.86rem;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="#inicio" aria-label="Ir para o início">
+        <div class="brand-mark" aria-hidden="true">CNC</div>
+        <div class="brand-copy">
+          <strong>Chef Na Cozinha</strong>
+          <span>Apresentação institucional da empresa</span>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre Nós</a>
+        <a href="#servicos">Produtos/Serviços</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <div class="hero-card">
+          <span class="eyebrow">Identidade comercial clara</span>
+          <h1>Apresentação institucional com foco em contexto, clareza e identificação da empresa.</h1>
+          <p>
+            A Chef Na Cozinha mantém uma presença digital voltada à sua identidade comercial e às
+            informações relacionadas à sua operação, com navegação simples, conteúdo textual suficiente
+            e dados empresariais visíveis desde a primeira visita.
+          </p>
+          <p>
+            Esta estrutura foi pensada para reunir elementos básicos de confiança: marca identificada,
+            seções institucionais, links legais funcionais e rodapé fiscal com texto real, sem depender
+            de recursos visuais pesados ou scripts desnecessários.
+          </p>
+
+          <div class="hero-points">
+            <div class="point">
+              <strong>Header de confiança</strong>
+              <span>Nome da empresa visível, navegação direta e apresentação imediata da marca.</span>
+            </div>
+            <div class="point">
+              <strong>Conteúdo não raso</strong>
+              <span>Blocos com contexto institucional para evitar leitura de página vazia ou genérica.</span>
+            </div>
+            <div class="point">
+              <strong>Rodapé de blindagem</strong>
+              <span>Razão social, CNPJ, endereço e páginas legais acessíveis em todas as visitas.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Sobre Nós</h2>
+          <p>
+            Em vez de uma página curta e superficial, a proposta aqui é apresentar a empresa com um
+            mínimo de contexto: quem é a organização, onde está localizada e como ela se posiciona
+            institucionalmente no ambiente digital.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="card about-copy">
+            <p>
+              A Chef Na Cozinha, inscrita no CNPJ 65.084.827/0001-76, é uma empresa brasileira
+              legalmente constituída, com base em Itaitinga, no Ceará. Sua presença digital é utilizada
+              para apresentar a marca, reforçar sua identificação empresarial e disponibilizar as
+              informações institucionais relacionadas à operação.
+            </p>
+            <p>
+              A estrutura desta página foi organizada para priorizar clareza. O visitante encontra um
+              cabeçalho objetivo, blocos com texto suficiente para contextualizar a atividade da empresa
+              e um rodapé com os principais dados fiscais em formato legível, em vez de elementos
+              escondidos ou informações fragmentadas.
+            </p>
+            <p>
+              O objetivo é oferecer uma experiência direta, estável e compreensível, sem promessas
+              agressivas, sem excesso de recursos visuais e sem mecanismos que prejudiquem a navegação
+              do usuário. A página existe para identificar corretamente a organização e concentrar seus
+              materiais institucionais de forma consistente.
+            </p>
+          </article>
+
+          <aside class="card about-notes">
+            <p>
+              Esta abordagem prioriza texto real, coerência entre domínio e dados empresariais, e uma
+              leitura simples tanto no desktop quanto no celular.
+            </p>
+            <p>
+              Também evita práticas que frequentemente fragilizam a interpretação da página, como
+              redirecionamentos automáticos, botões enganosos, scripts de bloqueio de saída ou conteúdo
+              insuficiente para explicar a operação.
+            </p>
+            <p>
+              O resultado é uma página one-page limpa, rápida, com cabeçalho institucional, conteúdo
+              central objetivo e base legal plenamente acessível.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Produtos/Serviços</h2>
+          <p>
+            Como esta é uma página institucional, a seção central foi estruturada para comunicar de
+            forma objetiva a função do site, a natureza da operação e os pontos de confiança da empresa.
+          </p>
+        </div>
+
+        <div class="services-grid">
+          <article class="card service-card">
+            <span class="service-index">01</span>
+            <h3>Apresentação da empresa</h3>
+            <p>
+              O site é utilizado para apresentar a Chef Na Cozinha, sua identidade empresarial e as
+              informações relacionadas à sua estrutura institucional.
+            </p>
+          </article>
+          <article class="card service-card">
+            <span class="service-index">02</span>
+            <h3>Conteúdo autoral e direto</h3>
+            <p>
+              Toda a comunicação foi organizada para ser clara, legível e suficiente, sem headlines
+              agressivas e sem conteúdo artificialmente inflado.
+            </p>
+          </article>
+          <article class="card service-card">
+            <span class="service-index">03</span>
+            <h3>Base legal acessível</h3>
+            <p>
+              As páginas de privacidade, termos, aviso legal e reembolso/devolução ficam visíveis e
+              funcionais para consulta permanente do usuário.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato">
+      <div class="wrap">
+        <div class="cta-band">
+          <strong>Estrutura simples, texto suficiente e dados empresariais em evidência.</strong>
+          <p>
+            A página foi montada para destacar a identidade da empresa e oferecer uma experiência leve,
+            responsiva e compatível com uma apresentação institucional estável.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="card contact-panel">
+            <h2>Contato e identificação</h2>
+            <div class="detail-list">
+              <div class="detail">
+                <strong>Marca utilizada</strong>
+                <span>Chef Na Cozinha</span>
+              </div>
+              <div class="detail">
+                <strong>Razão social</strong>
+                <span>Chef Na Cozinha</span>
+              </div>
+              <div class="detail">
+                <strong>Endereço empresarial</strong>
+                <span>Rua Jose Nunes de Melo 194, Pedras, Itaitinga - CE, 61887-892</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card identity-panel">
+            <h2>Base institucional</h2>
+            <div class="detail-list">
+              <div class="detail">
+                <strong>CNPJ</strong>
+                <span>65.084.827/0001-76</span>
+              </div>
+              <div class="detail">
+                <strong>Cidade sede</strong>
+                <span>Itaitinga - CE</span>
+              </div>
+              <div class="detail">
+                <strong>Documentos legais</strong>
+                <span>Política de Privacidade, Termos de Uso, Aviso Legal e Política de Reembolso/Devolução.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-wrap">
+      <div class="footer-top">
+        <div>
+          <strong>Chef Na Cozinha</strong>
+          <p>
+            Página institucional criada para reforçar a identificação da empresa, sua base cadastral e
+            seus documentos legais, com navegação direta e sem mecanismos ocultos de redirecionamento.
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="Links legais">
+          <a href="privacy.html">Política de Privacidade</a>
+          <a href="terms.html">Termos de Uso</a>
+          <a href="disclaimer.html">Aviso Legal</a>
+          <a href="refund.html">Política de Reembolso/Devolução</a>
+        </nav>
+      </div>
+
+      <div class="fiscal">
+        <div class="fiscal-box">
+          <strong>Razão social completa</strong>
+          <span>Chef Na Cozinha</span>
+        </div>
+        <div class="fiscal-box">
+          <strong>CNPJ</strong>
+          <span>65.084.827/0001-76</span>
+        </div>
+        <div class="fiscal-box">
+          <strong>Endereço completo</strong>
+          <span>Rua Jose Nunes de Melo 194, Pedras, Itaitinga - CE, 61887-892</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
