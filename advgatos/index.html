@@ -1,1 +1,281 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vida Felina — Alerta sobre a ração dos gatos</title>
+<meta name="robots" content="noindex, nofollow">
+<!--
+=====================================================================
+ ADVERTORIAL — TESTE A/B DE ÂNGULOS (MGID BR)
+---------------------------------------------------------------------
+ ÂNGULO via URL:  ?a=1 (combinado dinheiro+saúde — padrão)
+                  ?a=2 (saúde / sinais de alerta)
+                  ?a=3 (dinheiro puro)
+                  ?a=4 (exposé da ração)
+ Ex. no MGID:  https://seudominio.com/gatos/?a=2&rtkcid={click_id}
+
+ CLICK ID: o script lê rtkcid, clickid, cid ou click_id da URL e coloca
+ no texto pré-preenchido do WhatsApp como "(ref: XXXXX)". O bot deve
+ extrair esse ref e devolvê-lo no link de pagamento / postback do RedTrack.
+
+ TROCAR ANTES DE SUBIR:
+  1. WHATSAPP_NUMBER (abaixo, no script)
+  2. CRMV da Dra. Cláudia Mendes (procure "CRMV-XX")
+  3. Imagens: cada <div class="img-slot"> diz o que colocar
+  4. Depoimentos: SÓ prints/falas REAIS de clientes do X1 (slots marcados)
+=====================================================================
+-->
+<style>
+  :root{
+    --bg:#ffffff; --text:#1d1d1f; --muted:#5f6368; --line:#e6e6e6;
+    --brand:#0f5c4d; --alert:#c62828; --alert-bg:#fdecea;
+    --hl:#fff4c2; --cta:#1faa53; --cta-dark:#178a43; --box:#f6f8f7;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+       font-size:18px;line-height:1.65}
+  .topbar{border-bottom:3px solid var(--brand);padding:10px 16px;display:flex;
+          justify-content:space-between;align-items:center;background:#fff}
+  .logo{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:22px;color:var(--brand)}
+  .logo span{color:var(--text)}
+  .ad-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);
+            border:1px solid var(--line);padding:2px 6px;border-radius:3px}
+  main{max-width:680px;margin:0 auto;padding:0 16px 40px}
+  .kicker{color:var(--alert);font-weight:700;font-size:14px;text-transform:uppercase;
+          letter-spacing:.05em;margin:22px 0 6px}
+  h1{font-family:Georgia,"Times New Roman",serif;font-size:30px;line-height:1.2;margin:0 0 12px}
+  .sub{font-size:19px;color:var(--muted);margin:0 0 14px}
+  .byline{font-size:14px;color:var(--muted);border-top:1px solid var(--line);
+          border-bottom:1px solid var(--line);padding:8px 0;margin-bottom:18px}
+  h2{font-family:Georgia,"Times New Roman",serif;font-size:24px;line-height:1.25;margin:34px 0 10px}
+  p{margin:0 0 16px}
+  mark{background:var(--hl);padding:0 2px}
+  .img-slot{background:#eceff1;border:2px dashed #b0bec5;border-radius:8px;min-height:200px;
+            display:flex;align-items:center;justify-content:center;text-align:center;
+            color:#546e7a;font-size:14px;padding:16px;margin:18px 0 6px}
+  .caption{font-size:13px;color:var(--muted);margin:0 0 20px}
+  .quote{border-left:4px solid var(--brand);background:var(--box);padding:14px 16px;
+         margin:20px 0;font-style:italic}
+  .quote b{font-style:normal;display:block;margin-top:8px;font-size:15px;color:var(--brand)}
+  .alert-box{background:var(--alert-bg);border:1px solid #f5c2c0;border-radius:8px;
+             padding:16px;margin:20px 0}
+  .alert-box strong{color:var(--alert)}
+  .sign{display:flex;gap:12px;margin:0 0 18px;align-items:flex-start}
+  .num{flex:0 0 36px;height:36px;border-radius:50%;background:var(--alert);color:#fff;
+       font-weight:700;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .sign p{margin:0}
+  table{width:100%;border-collapse:collapse;margin:16px 0 20px;font-size:16px}
+  th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left}
+  th{background:var(--box)}
+  td.r{text-align:right;white-space:nowrap}
+  tr.total td{font-weight:700;border-top:2px solid var(--text)}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+  .compare div{border-radius:8px;padding:14px;text-align:center}
+  .compare .bad{background:var(--alert-bg)} .compare .good{background:#e8f5e9}
+  .compare .big{font-size:26px;font-weight:800;display:block;margin:4px 0}
+  .compare .bad .big{color:var(--alert)} .compare .good .big{color:var(--cta-dark)}
+  .compare small{font-size:13px;color:var(--muted)}
+  .offer{border:3px solid var(--cta);border-radius:12px;padding:20px 16px;margin:28px 0;
+         text-align:center;background:#fbfffc}
+  .offer h3{font-family:Georgia,serif;font-size:23px;margin:0 0 10px}
+  .offer ul{text-align:left;padding-left:20px;margin:12px 0}
+  .offer li{margin-bottom:6px}
+  .price{font-size:15px;color:var(--muted)}
+  .price s{color:var(--alert)}
+  .price b{display:block;font-size:34px;color:var(--cta-dark)}
+  .cta{display:block;background:var(--cta);color:#fff;text-decoration:none;font-weight:800;
+       font-size:19px;padding:17px 14px;border-radius:10px;text-align:center;margin:18px 0;
+       box-shadow:0 4px 0 var(--cta-dark)}
+  .cta:active{transform:translateY(2px);box-shadow:0 2px 0 var(--cta-dark)}
+  .cta small{display:block;font-weight:500;font-size:13px;opacity:.95;margin-top:3px}
+  .guarantee{background:var(--box);border-radius:8px;padding:16px;margin:16px 0;font-size:16px}
+  .testi{border:1px dashed #b0bec5;border-radius:8px;padding:14px;margin:12px 0;
+         font-size:15px;color:#546e7a;background:#fafafa}
+  details{border-bottom:1px solid var(--line);padding:12px 0}
+  summary{font-weight:700;cursor:pointer}
+  details p{margin:10px 0 0;font-size:17px}
+  footer{max-width:680px;margin:0 auto;padding:20px 16px 90px;font-size:12px;
+         color:var(--muted);border-top:1px solid var(--line)}
+  .sticky{position:fixed;left:0;right:0;bottom:0;padding:10px 16px;background:rgba(255,255,255,.97);
+          border-top:1px solid var(--line);display:none;z-index:10}
+  .sticky .cta{margin:0;padding:13px;font-size:17px}
+  @media (min-width:700px){h1{font-size:36px}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">Vida<span>Felina</span></div>
+  <div class="ad-label">Conteúdo patrocinado</div>
+</header>
+
+<main>
+  <div class="kicker" id="kicker">Alerta para donos de gatos</div>
+  <h1 id="headline">Veterinária alerta: o erro na alimentação que já custou até R$2.800 a donos de gatos — e quase todos cometem sem saber</h1>
+  <p class="sub" id="subhead">A Dra. Cláudia Mendes explica por que até a ração "Super Premium" pode estar sobrecarregando os rins do seu gato em silêncio — e a troca simples que custa menos de R$11 por semana.</p>
+  <div class="byline">Por Redação Vida Felina · Com a médica veterinária Dra. Cláudia Mendes (CRMV-XX 00000)</div>
+
+  <div class="img-slot">IMAGEM 1: gato deitado, apático, olhar cansado (ou gato na caixa de areia).<br>Foto real, sem aparência de banco de imagens.</div>
+  <p class="caption">Gatos escondem a dor. Quando o dono percebe, o problema muitas vezes já está avançado.</p>
+
+  <p>A cena se repete toda semana nas clínicas veterinárias do Brasil.</p>
+  <p>O dono chega desesperado. O gato parou de comer, está escondido debaixo da cama, vai à caixa de areia toda hora e quase não sai xixi. Exames, soro, internação. <mark>A conta passa de R$2.000 — às vezes chega a R$2.800.</mark></p>
+  <p>E quase sempre o dono diz a mesma frase:</p>
+  <div class="quote">"Mas doutora, eu sempre dei a melhor ração… a mais cara do pet shop."
+    <b>— frase que a Dra. Cláudia Mendes diz ouvir com frequência no consultório</b></div>
+  <p>É exatamente esse o problema. <strong>Não importa se a ração é barata, Premium ou Super Premium.</strong> O erro não está na marca. Está no tipo de comida.</p>
+
+  <h2>Seu gato é um animal do deserto. E está desidratado sem você perceber.</h2>
+  <p>O gato doméstico descende de felinos do deserto. Na natureza, ele quase não bebe água — <strong>a água vem da própria comida</strong>. Uma presa fresca tem cerca de <mark>70% de água</mark>.</p>
+  <p>A ração seca tem cerca de <mark>10%</mark>.</p>
+  <p>Faça a conta: o gato que come só ração seca vive com uma fração da água que o corpo dele foi feito para receber. E ele não compensa bebendo mais, porque o instinto dele não manda.</p>
+  <div class="quote">"O resultado é uma urina concentrada, dia após dia, ano após ano. Os rins trabalham sobrecarregados. É assim que surgem cristais na bexiga, obstruções e a insuficiência renal — que é uma das causas mais comuns de morte em gatos adultos e idosos."
+    <b>— Dra. Cláudia Mendes, médica veterinária</b></div>
+  <p>E o pior: <strong>o gato não reclama.</strong> Ele é um predador que, por instinto, esconde fraqueza. Quando os sinais ficam óbvios, os rins muitas vezes já perderam boa parte da função.</p>
+
+  <a class="cta wa-link" href="#">QUERO PROTEGER MEU GATO<small>Receba as receitas no WhatsApp — só pague se gostar</small></a>
+
+  <h2>Os 5 sinais de que seu gato está adoecendo em silêncio</h2>
+  <p>A Dra. Cláudia pede que todo dono de gato observe estes sinais <strong>hoje</strong>. Se você reconhecer pelo menos um, preste atenção redobrada:</p>
+
+  <div class="sign"><div class="num">1</div><p><strong>Vômitos frequentes.</strong> Muita gente acha "normal" gato vomitar. Não é. Vômito recorrente é o corpo rejeitando o que recebe.</p></div>
+  <div class="sign"><div class="num">2</div><p><strong>Pelo opaco, seco ou quebradiço.</strong> O pelo é o espelho da nutrição. Pelo sem brilho indica deficiência nutricional.</p></div>
+  <div class="sign"><div class="num">3</div><p><strong>Idas constantes à caixa de areia com pouco xixi.</strong> Este é o sinal mais urgente: indica rins e bexiga sobrecarregados. Se o gato faz força e não sai urina, é emergência.</p></div>
+  <div class="sign"><div class="num">4</div><p><strong>Recusa de comida.</strong> Gato que "enjoou" da ração pode estar, na verdade, sentindo mal-estar.</p></div>
+  <div class="sign"><div class="num">5</div><p><strong>Letargia e sono em excesso.</strong> Gatos dormem muito, mas apatia, isolamento e falta de interesse podem esconder um quadro renal avançado.</p></div>
+
+  <div class="alert-box"><strong>Atenção:</strong> se o seu gato está com dificuldade para urinar ou parou de comer, leve-o ao veterinário imediatamente. A alimentação natural é prevenção e cuidado contínuo — não substitui atendimento de emergência.</div>
+
+  <h2>O que a embalagem não conta sobre a ração</h2>
+  <div class="img-slot">IMAGEM 2: close na tabela de ingredientes de uma embalagem de ração (sem marca visível) com "milho" e "farinha de vísceras" destacados.</div>
+  <p class="caption">Leia o rótulo da ração do seu gato. Os primeiros ingredientes dizem muito.</p>
+  <p>Vire o saco de ração do seu gato e leia os ingredientes. Em muitas delas, você vai encontrar <strong>milho</strong> entre os primeiros itens — um cereal barato para um animal que é <strong>carnívoro estrito</strong>.</p>
+  <p>E quando aparece "proteína", nem sempre é a carne que você imagina. Termos como <mark>"farinha de vísceras" e "subprodutos de origem animal"</mark> podem incluir partes que sobram do abate — como vísceras, penas e outros resíduos — processadas, moídas e transformadas em pó.</p>
+  <p>Tudo isso passa por altas temperaturas, vira bolinha seca, e é vendido em embalagem bonita com foto de frango suculento.</p>
+  <div class="quote">"Eu não digo que o dono é culpado. Ele foi ensinado que ração é o certo. Mas gato é carnívoro, precisa de água na comida e de proteína de verdade. Comida de verdade."
+    <b>— Dra. Cláudia Mendes</b></div>
+
+  <h2>Quanto custa um gato doente (e quanto custa evitar)</h2>
+  <p>Vamos falar de dinheiro, porque é aqui que a maioria dos donos leva o maior susto.</p>
+  <p>Quando o gato já desenvolveu problema renal ou urinário, o caminho costuma ser este: consulta, exames, internação com soro (<strong>R$2.000 a R$2.800</strong> em muitos casos) e, depois, ração medicamentosa renal ou urinária para o resto da vida — que pode passar de <strong>R$200 por mês</strong>.</p>
+
+  <div class="compare">
+    <div class="bad"><small>Ração medicamentosa</small><span class="big">R$200+</span><small>por mês, depois que o gato adoece</small></div>
+    <div class="good"><small>Comida de verdade</small><span class="big">R$42,80</span><small>por mês, para prevenir</small></div>
+  </div>
+
+  <p>Sim: <strong>a alimentação natural custa menos que a ração Premium.</strong> A Dra. Cláudia montou a conta de uma semana de comida para um gato adulto:</p>
+  <table>
+    <tr><th>Ingrediente (por semana)</th><th class="r">Custo aprox.</th></tr>
+    <tr><td>Frango</td><td class="r">R$ X,XX</td></tr>
+    <tr><td>Sardinha</td><td class="r">R$ X,XX</td></tr>
+    <tr><td>Cenoura</td><td class="r">R$ X,XX</td></tr>
+    <tr><td>Abobrinha</td><td class="r">R$ X,XX</td></tr>
+    <tr class="total"><td>Total da semana</td><td class="r">R$10,70</td></tr>
+    <tr class="total"><td>Total do mês</td><td class="r">R$42,80</td></tr>
+  </table>
+  <!-- PREENCHER os valores por ingrediente com a mesma conta usada nos vídeos (soma = R$10,70) -->
+
+  <p><mark>Menos de R$11 por semana.</mark> Com ingredientes que você compra no mercado da esquina. Comida com água de verdade, proteína de verdade, sem milho e sem resto de abate.</p>
+
+  <div class="img-slot">IMAGEM 3: tigela com comida natural pronta (frango desfiado, cenoura, abobrinha) + gato comendo com vontade.</div>
+  <p class="caption">Comida natural: úmida, como a natureza do gato pede.</p>
+
+  <h2>"Mas eu não sei fazer comida para gato"</h2>
+  <p>Foi exatamente por isso que a Dra. Cláudia Mendes reuniu <strong>100 receitas</strong> no guia <strong>"Alimentação Natural para Gatos"</strong>. Tudo explicado passo a passo, com ingredientes simples e baratos, para você nunca mais ficar na dúvida sobre o que colocar no pote do seu gato.</p>
+
+  <!-- DEPOIMENTOS: usar SOMENTE prints/falas reais de clientes do X1, com autorização. Apagar os slots que não forem preenchidos. -->
+  <div class="testi">[ESPAÇO PARA DEPOIMENTO REAL 1 — print de WhatsApp de cliente, com nome abreviado e foto do gato, se autorizado]</div>
+  <div class="testi">[ESPAÇO PARA DEPOIMENTO REAL 2]</div>
+  <div class="testi">[ESPAÇO PARA DEPOIMENTO REAL 3]</div>
+
+  <div class="offer">
+    <h3>Alimentação Natural para Gatos</h3>
+    <p style="margin:0">O guia da Dra. Cláudia Mendes</p>
+    <ul>
+      <li>✅ <strong>100 receitas</strong> de comida de verdade para gatos</li>
+      <li>✅ Ingredientes baratos, do mercado comum</li>
+      <li>✅ Passo a passo simples, para quem nunca cozinhou para pet</li>
+      <li>✅ Como fazer a troca da ração para a comida natural</li>
+      <li>✅ Arquivo digital: recebe no celular na hora</li>
+    </ul>
+    <p class="price">Menos que uma única consulta veterinária<b>R$29,90</b></p>
+    <a class="cta wa-link" href="#">QUERO AS 100 RECEITAS<small>Receba primeiro no WhatsApp — pague só se gostar</small></a>
+    <div class="guarantee">🤝 <strong>Garantia de confiança:</strong> você recebe o guia no WhatsApp, folheia com calma e <strong>só paga se gostar</strong>. Sem cartão, sem cadastro, sem risco.</div>
+  </div>
+
+  <h2>Cada semana na ração seca é mais uma semana de sobrecarga</h2>
+  <p>Os rins do gato não se regeneram. A função que se perde, não volta. Por isso a hora de mudar não é quando os sinais aparecem — é <strong>antes</strong>.</p>
+  <p>Você pode continuar pagando caro pela ração e torcer para nada acontecer. Ou pode gastar <strong>R$29,90 uma única vez</strong> e aprender a dar ao seu gato a comida que o corpo dele foi feito para comer, por menos de R$11 por semana.</p>
+  <p><strong>Seu gato não pode escolher o que come. Você pode.</strong></p>
+
+  <a class="cta wa-link" href="#">SIM, QUERO CUIDAR DO MEU GATO<small>Receber o guia agora no WhatsApp</small></a>
+
+  <h2>Perguntas frequentes</h2>
+  <details><summary>Preciso pagar antes de receber?</summary><p>Não. Você recebe o guia completo no WhatsApp, olha tudo e só paga os R$29,90 se gostar.</p></details>
+  <details><summary>E se meu gato não aceitar a comida natural?</summary><p>O guia explica como fazer a transição de forma gradual, misturando aos poucos, para o gato se acostumar sem estresse.</p></details>
+  <details><summary>Serve para gato filhote ou idoso?</summary><p>O guia traz orientações para diferentes fases. Gatos com doença já diagnosticada devem ter a dieta acompanhada pelo veterinário de confiança.</p></details>
+  <details><summary>Como recebo?</summary><p>Clique no botão verde, envie a mensagem no WhatsApp e você recebe o arquivo digital na hora.</p></details>
+</main>
+
+<footer>
+  <p><strong>Conteúdo patrocinado.</strong> Este material tem caráter informativo e não substitui consulta, diagnóstico ou tratamento veterinário. Em caso de sintomas, procure um médico veterinário. Resultados variam de animal para animal.</p>
+  <p>Vida Felina © 2026</p>
+</footer>
+
+<div class="sticky" id="sticky"><a class="cta wa-link" href="#">RECEBER AS 100 RECEITAS NO WHATSAPP</a></div>
+
+<script>
+(function(){
+  // ====== CONFIG ======
+  var WHATSAPP_NUMBER = "55XXXXXXXXXXX"; // só números, com 55 + DDD
+  var BASE_MSG = "Olá! Quero receber o guia Alimentação Natural para Gatos 🐱";
+
+  var ANGLES = {
+    "1": { // combinado dinheiro + saúde (padrão)
+      kicker: "Alerta para donos de gatos",
+      h1: "Veterinária alerta: o erro na alimentação que já custou até R$2.800 a donos de gatos — e quase todos cometem sem saber",
+      sub: "A Dra. Cláudia Mendes explica por que até a ração \"Super Premium\" pode estar sobrecarregando os rins do seu gato em silêncio — e a troca simples que custa menos de R$11 por semana."
+    },
+    "2": { // saúde / sinais
+      kicker: "Saúde felina",
+      h1: "Dono de gato: se ele faz isso na caixa de areia, os rins podem estar falhando em silêncio",
+      sub: "A veterinária Dra. Cláudia Mendes lista os 5 sinais que quase todo dono ignora — e o que colocar no pote para proteger o seu gato."
+    },
+    "3": { // dinheiro puro
+      kicker: "Economia",
+      h1: "Donos de gato estão trocando a ração de R$200 por comida de verdade que custa R$42 por mês",
+      sub: "A veterinária Dra. Cláudia Mendes mostra a conta — e explica por que a troca ainda pode evitar uma internação de mais de R$2.000."
+    },
+    "4": { // exposé
+      kicker: "Investigação",
+      h1: "O que realmente tem dentro da ração \"premium\" do seu gato (leia o rótulo antes de encher o pote de novo)",
+      sub: "Milho, farinha de vísceras e subprodutos de abate: a veterinária Dra. Cláudia Mendes explica o que esses ingredientes fazem com os rins do seu gato."
+    }
+  };
+
+  var p = new URLSearchParams(window.location.search);
+  var a = ANGLES[p.get("a")] ? p.get("a") : "1";
+  document.getElementById("kicker").textContent = ANGLES[a].kicker;
+  document.getElementById("headline").textContent = ANGLES[a].h1;
+  document.getElementById("subhead").textContent = ANGLES[a].sub;
+
+  var cid = p.get("rtkcid") || p.get("clickid") || p.get("click_id") || p.get("cid") || "";
+  var msg = BASE_MSG + (cid ? " (ref: " + cid + "-a" + a + ")" : " (a" + a + ")");
+  var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+  var links = document.querySelectorAll(".wa-link");
+  for (var i = 0; i < links.length; i++){ links[i].href = url; links[i].target = "_blank"; links[i].rel = "noopener"; }
+
+  // botão fixo aparece depois que a pessoa rola 35% da página
+  var sticky = document.getElementById("sticky");
+  window.addEventListener("scroll", function(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    sticky.style.display = (h > 0 && window.scrollY / h > 0.35) ? "block" : "none";
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
 
